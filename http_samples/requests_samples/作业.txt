@@ -1,0 +1,12 @@
+基础作业：
+1. 熟悉curl, wget的常用参数及用法
+2. 自定义一个myip命令，可以一键查看本机的外网IP
+3. 熟悉urllib和requests库的用法，使用这两个库分别请求httpbin.org网站上的各种API
+4. 在云服务器上安装tinyproxy，配置启动、测试，并配置每隔5分钟自动重启一次（使用crontab）。
+5. 使用wget命令下载一个网站，并在本地配置访问。
+
+
+扩展作业：
+1. 熟悉httpie的用法
+2. 安装pycurl，并用pycurl实现get/post请求httpbin.org上的接口
+3. 下载httpbin.org的源码，并在本地运行起来。
