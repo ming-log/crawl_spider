@@ -46,14 +46,17 @@ def process_data(data):
         print(data)
 
 
+# Queue.task_done() 在完成一项工作之后，Queue.task_done()函数向任务已经完成的队列发送一个信号
+# Queue.join() 实际上意味着等到队列为空，再执行别的操作
+
 def download():
     while True:
         # 阻塞直到从队列里获取一条消息
         link = link_queue.get()
         if link is None:
             break
-        data = parse_univerity(link)
-        process_data(data)
+        data = parse_univerity(link)    # 提取信息
+        process_data(data)              # 处理信息
         link_queue.task_done()
         print('remaining queue: %s' % link_queue.qsize())
 
@@ -65,7 +68,7 @@ if __name__ == '__main__':
     # 2. 提取列表页面的链接
     links = selector.xpath('//div[@id="content"]//tr[position()>1]/td[2]/a/@href')
     for link in links:
-        if not link.startswith('http://qianmu.iguye.com'):
+        if not link.startswith('http://qianmu.iguye.com'):   # 以括号内的字符开头ZZZ
             link = 'http://qianmu.iguye.com/%s' % link
         link_queue.put(link)
 
@@ -76,7 +79,7 @@ if __name__ == '__main__':
         threads.append(t)
     # 阻塞队列，直到队列被清空
     link_queue.join()
-    # 向队列发送N个None，以通知线程退出
+    # 向队列发送N个None，以通知线程退出   结束队列
     for i in range(threads_num):
         link_queue.put(None)
     # 退出线程

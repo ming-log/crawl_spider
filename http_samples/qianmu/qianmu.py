@@ -48,7 +48,7 @@ if __name__ == '__main__':
     # 2. 提取列表页面的链接
     links = selector.xpath('//div[@id="content"]//tr[position()>1]/td[2]/a/@href')
     for link in links:
-        if not link.startswith('http://qianmu.iguye.com'):
+        if not link.startswith('http://qianmu.iguye.com'):   # 以括号中的字段开头
             link = 'http://qianmu.iguye.com/%s' % link
         # 3. 提取详情页的信息
         data = parse_univerity(link)
